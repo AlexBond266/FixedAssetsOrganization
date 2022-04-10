@@ -1,0 +1,89 @@
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\PR_TRPO.exe.config
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\PR_TRPO.exe
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\PR_TRPO.pdb
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.csprojAssemblyReference.cache
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Properties.Resources.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.csproj.GenerateResource.cache
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.csproj.CoreCompileInputs.cache
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.exe
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.pdb
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuButton.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu_UI_v1.5.3.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Form1.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.csproj.CopyComplete
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuLabel.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.exe.config
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuImageButton.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuDataGridView.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuPictureBox.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.Sotrydniki.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Add_Sotrydnik.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuTextbox.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Edit_Sotrydniki.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.Dolhnosti.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.Obrazovanie.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.Otpyska.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.PK.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.UsersControlers.TD.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Login.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuDropdown.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Reg.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.csproj.ResolveComReference.cache
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuCircleProgress.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Load.resources
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuDatePicker.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuScrollBar.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuPages.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\bin\Debug\Bunifu.UI.WinForms.BunifuUserControl.xml
+D:\ALEKS\Колледж\3 курс\ТРПО\Практика ТРПО\2 семестр\PR_TRPO\obj\Debug\PR_TRPO.Forms.Add_Otpyska.resources
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\PR_TRPO.exe.config
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\PR_TRPO.exe
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\PR_TRPO.pdb
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuButton.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuCircleProgress.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuDataGridView.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuDatePicker.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuDropdown.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuImageButton.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuLabel.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuPages.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuPictureBox.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuScrollBar.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuTextbox.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu.UI.WinForms.BunifuUserControl.xml
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Bunifu_UI_v1.5.3.xml
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.csproj.AssemblyReference.cache
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.exe.config
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.csproj.ResolveComReference.cache
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Add_Otpyska.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Add_Sotrydnik.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Edit_Sotrydniki.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Load.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Login.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Forms.Reg.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Properties.Resources.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.Dolhnosti.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.Obrazovanie.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.Otpyska.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.PK.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.Sotrydniki.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.UsersControlers.TD.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.csproj.GenerateResource.cache
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.csproj.CoreCompileInputs.cache
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.exe
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.pdb
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\MySql.Data.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Google.Protobuf.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Zstandard.Net.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\K4os.Compression.LZ4.Streams.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\BouncyCastle.Crypto.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\Ubiety.Dns.Core.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\System.Memory.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\System.Buffers.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\K4os.Compression.LZ4.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\K4os.Hash.xxHash.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\System.Numerics.Vectors.dll
+E:\ПРАКТИКА\Прога\K_BD\bin\Debug\MySql.Data.xml
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.Form1OSN.resources
+E:\ПРАКТИКА\Прога\K_BD\obj\Debug\PR_TRPO.csproj.CopyComplete

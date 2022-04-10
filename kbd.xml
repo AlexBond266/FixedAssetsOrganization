@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.9.5
+- https://www.phpmyadmin.net
+-
+- Хост: localhost:3306
+- Время создания: Дек 01 2021 г., 02:30
+- Версия сервера: 5.7.24
+- Версия PHP: 7.4.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="kbd" collation="utf8_general_ci" charset="utf8">
+            <pma:table name="мол">
+                CREATE TABLE `мол` (
+                  `id_мол` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_должности` int(11) NOT NULL,
+                  `ф` varchar(30) NOT NULL,
+                  `и` varchar(30) NOT NULL,
+                  `о` varchar(30) NOT NULL,
+                  PRIMARY KEY (`id_мол`),
+                  KEY `id_мол` (`id_мол`),
+                  KEY `id_должности` (`id_должности`),
+                  CONSTRAINT `мол_ibfk_1` FOREIGN KEY (`id_должности`) REFERENCES `должности` (`id_должности`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:trigger name="Перенос_ответственности">
+                CREATE TRIGGER `Перенос_ответственности` BEFORE DELETE ON `мол`
+                 FOR EACH ROW UPDATE `закрепление`
+                	SET `id_мол` = '1'
+                    	WHERE `закрепление`.`id_мол` = `OLD`.`id_мол`
+            </pma:trigger>
+            <pma:table name="должности">
+                CREATE TABLE `должности` (
+                  `id_должности` int(11) NOT NULL AUTO_INCREMENT,
+                  `наименование` varchar(30) NOT NULL,
+                  PRIMARY KEY (`id_должности`),
+                  KEY `id_должности` (`id_должности`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:trigger name="Перенос_должности">
+                CREATE TRIGGER `Перенос_должности` BEFORE DELETE ON `должности`
+                 FOR EACH ROW UPDATE `мол`
+                	SET `id_должности` = '2'
+                    	WHERE `мол`.`id_должности` = `OLD`.`id_должности`
+            </pma:trigger>
+            <pma:table name="коддоступа">
+                CREATE TABLE `коддоступа` (
+                  `id_коддоступа` int(11) NOT NULL AUTO_INCREMENT,
+                  `коддоступа` varchar(30) NOT NULL,
+                  PRIMARY KEY (`id_коддоступа`),
+                  KEY `id_коддоступа` (`id_коддоступа`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="причины">
+                CREATE TABLE `причины` (
+                  `id_причины` int(11) NOT NULL AUTO_INCREMENT,
+                  `наименование` varchar(150) NOT NULL,
+                  PRIMARY KEY (`id_причины`),
+                  KEY `id_причины` (`id_причины`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:trigger name="Перенос_причины_два">
+                CREATE TRIGGER `Перенос_причины_два` BEFORE DELETE ON `причины`
+                 FOR EACH ROW UPDATE `списание`
+                	SET `id_причины` = '1'
+                    	WHERE `списание`.`id_причины` = `OLD`.`id_причины`
+            </pma:trigger>
+            <pma:table name="авторизация">
+                CREATE TABLE `авторизация` (
+                  `id_эко` int(11) NOT NULL AUTO_INCREMENT,
+                  `fio` varchar(100) NOT NULL,
+                  `password` varchar(10) NOT NULL,
+                  `admin` int(11) NOT NULL,
+                  PRIMARY KEY (`id_эко`),
+                  KEY `id_эко` (`id_эко`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="вид_ос">
+                CREATE TABLE `вид_ос` (
+                  `id_вида_ос` int(11) NOT NULL AUTO_INCREMENT,
+                  `наименование` varchar(50) NOT NULL,
+                  PRIMARY KEY (`id_вида_ос`),
+                  KEY `id_вида_ос` (`id_вида_ос`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:trigger name="Перенос_вида">
+                CREATE TRIGGER `Перенос_вида` BEFORE DELETE ON `вид_ос`
+                 FOR EACH ROW UPDATE `ос`
+                	SET `id_вида_ос` = '1'
+                    	WHERE `ос`.`id_вида_ос` = `OLD`.`id_вида_ос`
+            </pma:trigger>
+            <pma:table name="вид_р">
+                CREATE TABLE `вид_р` (
+                  `id_вида_р` int(11) NOT NULL AUTO_INCREMENT,
+                  `наименование` varchar(100) NOT NULL,
+                  PRIMARY KEY (`id_вида_р`),
+                  KEY `id_вида_р` (`id_вида_р`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:trigger name="Перенос_ремонта">
+                CREATE TRIGGER `Перенос_ремонта` BEFORE DELETE ON `вид_р`
+                 FOR EACH ROW UPDATE `ремонт`
+                	SET `id_вида_р` = '1'
+                    	WHERE `ремонт`.`id_вида_р` = `OLD`.`id_вида_р`
+            </pma:trigger>
+            <pma:table name="закрепление">
+                CREATE TABLE `закрепление` (
+                  `id_закреп` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_ос` int(11) NOT NULL,
+                  `id_мол` int(11) NOT NULL,
+                  PRIMARY KEY (`id_закреп`),
+                  KEY `id_закреп` (`id_закреп`),
+                  KEY `id_ос` (`id_ос`),
+                  KEY `закрепление_ibfk_2` (`id_мол`),
+                  CONSTRAINT `закрепление_ibfk_1` FOREIGN KEY (`id_ос`) REFERENCES `ос` (`id_ос`) ON DELETE CASCADE ON UPDATE CASCADE,
+                  CONSTRAINT `закрепление_ibfk_2` FOREIGN KEY (`id_мол`) REFERENCES `мол` (`id_мол`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="ос">
+                CREATE TABLE `ос` (
+                  `id_ос` int(11) NOT NULL AUTO_INCREMENT,
+                  `ин` int(10) NOT NULL,
+                  `id_вида_ос` int(11) NOT NULL,
+                  `дата_принятия` date NOT NULL,
+                  `пер_стоимость` double NOT NULL,
+                  `год_сум_а` double NOT NULL,
+                  `наименование` varchar(150) NOT NULL,
+                  `норма_ндс` int(11) NOT NULL,
+                  `спи` int(11) NOT NULL,
+                  `сумма_ндс` double NOT NULL,
+                  `фин_стоимость` double NOT NULL,
+                  `статус` int(11) NOT NULL,
+                  PRIMARY KEY (`id_ос`),
+                  KEY `id_ос` (`id_ос`),
+                  KEY `id_вида_ос` (`id_вида_ос`),
+                  CONSTRAINT `ос_ibfk_1` FOREIGN KEY (`id_вида_ос`) REFERENCES `вид_ос` (`id_вида_ос`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="ремонт">
+                CREATE TABLE `ремонт` (
+                  `id_р` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_ос` int(11) NOT NULL,
+                  `id_вида_р` int(11) NOT NULL,
+                  `дата_начала` date NOT NULL,
+                  `дата_окончания` date DEFAULT NULL,
+                  `сум_затрат` double DEFAULT NULL,
+                  PRIMARY KEY (`id_р`),
+                  KEY `id_р` (`id_р`),
+                  KEY `id_ос` (`id_ос`),
+                  KEY `ремонт_ibfk_2` (`id_вида_р`),
+                  CONSTRAINT `ремонт_ibfk_1` FOREIGN KEY (`id_ос`) REFERENCES `ос` (`id_ос`) ON DELETE CASCADE ON UPDATE CASCADE,
+                  CONSTRAINT `ремонт_ibfk_2` FOREIGN KEY (`id_вида_р`) REFERENCES `вид_р` (`id_вида_р`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="списание">
+                CREATE TABLE `списание` (
+                  `id_спис` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_ос` int(11) NOT NULL,
+                  `id_причины` int(11) NOT NULL,
+                  `дата_списания` date NOT NULL,
+                  PRIMARY KEY (`id_спис`),
+                  KEY `id_спис` (`id_спис`),
+                  KEY `id_ос` (`id_ос`),
+                  KEY `списание_ibfk_2` (`id_причины`),
+                  CONSTRAINT `списание_ibfk_1` FOREIGN KEY (`id_ос`) REFERENCES `ос` (`id_ос`) ON DELETE CASCADE ON UPDATE CASCADE,
+                  CONSTRAINT `списание_ibfk_2` FOREIGN KEY (`id_причины`) REFERENCES `причины` (`id_причины`) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:procedure name="GodFinSumm">
+                CREATE DEFINER=`root`@`localhost` PROCEDURE `GodFinSumm`(IN `dat1` DATE, IN `dat2` DATE)
+                    NO SQL
+                SELECT SUM(`фин_стоимость`) FROM `ос` WHERE `дата_принятия` BETWEEN dat1 AND dat2
+            </pma:procedure>
+            <pma:procedure name="OSnaMOL">
+                CREATE DEFINER=`root`@`localhost` PROCEDURE `OSnaMOL`()
+                    NO SQL
+                SELECT CONCAT(`мол`.`ф`,' ',`мол`.`и`,' ',`мол`.`о`), COUNT(`закрепление`.`id_мол`) FROM `мол` INNER JOIN `закрепление` on `мол`.`id_мол`=`закрепление`.`id_мол` GROUP BY CONCAT(`мол`.`ф`,' ',`мол`.`и`,' ',`мол`.`о`)
+            </pma:procedure>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - База данных: 'kbd'
+    -->
+    <database name="kbd">
+        <!-- Таблица мол -->
+        <table name="мол">
+            <column name="id_мол">1</column>
+            <column name="id_должности">1</column>
+            <column name="ф">Арещенко</column>
+            <column name="и">Татьяна</column>
+            <column name="о">Ивановна</column>
+        </table>
+        <table name="мол">
+            <column name="id_мол">2</column>
+            <column name="id_должности">4</column>
+            <column name="ф">Карпако</column>
+            <column name="и">Николай</column>
+            <column name="о">Михайловия</column>
+        </table>
+        <table name="мол">
+            <column name="id_мол">4</column>
+            <column name="id_должности">3</column>
+            <column name="ф">Иванов</column>
+            <column name="и">Дмитрий</column>
+            <column name="о">Николаевич</column>
+        </table>
+        <table name="мол">
+            <column name="id_мол">5</column>
+            <column name="id_должности">5</column>
+            <column name="ф">Кирилов</column>
+            <column name="и">Иван</column>
+            <column name="о">Павлович</column>
+        </table>
+        <!-- Таблица должности -->
+        <table name="должности">
+            <column name="id_должности">1</column>
+            <column name="наименование">Директор</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">2</column>
+            <column name="наименование">Сотрудник общего назначения</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">3</column>
+            <column name="наименование">Главный инженер</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">4</column>
+            <column name="наименование">Инженер-технолог</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">5</column>
+            <column name="наименование">Наладчик оборудования</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">6</column>
+            <column name="наименование">Аналитик</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">7</column>
+            <column name="наименование">Бухгалтер</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">8</column>
+            <column name="наименование">Экономист</column>
+        </table>
+        <table name="должности">
+            <column name="id_должности">9</column>
+            <column name="наименование">Уборщик</column>
+        </table>
+        <!-- Таблица коддоступа -->
+        <table name="коддоступа">
+            <column name="id_коддоступа">1</column>
+            <column name="коддоступа">1234</column>
+        </table>
+        <!-- Таблица причины -->
+        <table name="причины">
+            <column name="id_причины">1</column>
+            <column name="наименование">Преждевременный износ</column>
+        </table>
+        <table name="причины">
+            <column name="id_причины">2</column>
+            <column name="наименование">Окончание СПИ</column>
+        </table>
+        <table name="причины">
+            <column name="id_причины">3</column>
+            <column name="наименование">Моральное устаревание</column>
+        </table>
+        <table name="причины">
+            <column name="id_причины">4</column>
+            <column name="наименование">Технологическое устаревание</column>
+        </table>
+        <table name="причины">
+            <column name="id_причины">5</column>
+            <column name="наименование">Передача или продажа</column>
+        </table>
+        <!-- Таблица авторизация -->
+        <table name="авторизация">
+            <column name="id_эко">1</column>
+            <column name="fio">Бондарев Александр Андреевич</column>
+            <column name="password">1111</column>
+            <column name="admin">1</column>
+        </table>
+        <table name="авторизация">
+            <column name="id_эко">2</column>
+            <column name="fio">Иваненко Жанна Викторовна</column>
+            <column name="password">1111</column>
+            <column name="admin">1</column>
+        </table>
+        <table name="авторизация">
+            <column name="id_эко">4</column>
+            <column name="fio">Юрченко Инга Ивановна</column>
+            <column name="password">1111</column>
+            <column name="admin">0</column>
+        </table>
+        <!-- Таблица вид_ос -->
+        <table name="вид_ос">
+            <column name="id_вида_ос">1</column>
+            <column name="наименование">ОС общего назначения</column>
+        </table>
+        <table name="вид_ос">
+            <column name="id_вида_ос">2</column>
+            <column name="наименование">Производственный инвентарь</column>
+        </table>
+        <table name="вид_ос">
+            <column name="id_вида_ос">3</column>
+            <column name="наименование">Хозяйственный инвентарь</column>
+        </table>
+        <table name="вид_ос">
+            <column name="id_вида_ос">4</column>
+            <column name="наименование">Передаточные устройства</column>
+        </table>
+        <table name="вид_ос">
+            <column name="id_вида_ос">5</column>
+            <column name="наименование">Транспортные средства</column>
+        </table>
+        <table name="вид_ос">
+            <column name="id_вида_ос">6</column>
+            <column name="наименование">Машины и оборудование</column>
+        </table>
+        <!-- Таблица вид_р -->
+        <table name="вид_р">
+            <column name="id_вида_р">1</column>
+            <column name="наименование">Устранение локальной неисправности</column>
+        </table>
+        <table name="вид_р">
+            <column name="id_вида_р">3</column>
+            <column name="наименование">Замена основного узла</column>
+        </table>
+        <table name="вид_р">
+            <column name="id_вида_р">4</column>
+            <column name="наименование">Восстановление лакокрасочного покрытия</column>
+        </table>
+        <table name="вид_р">
+            <column name="id_вида_р">5</column>
+            <column name="наименование">Модернизация комплектующих</column>
+        </table>
+        <table name="вид_р">
+            <column name="id_вида_р">6</column>
+            <column name="наименование">Технологическое улучшение</column>
+        </table>
+        <table name="вид_р">
+            <column name="id_вида_р">7</column>
+            <column name="наименование">Замена опорного аппарата</column>
+        </table>
+        <!-- Таблица закрепление -->
+        <table name="закрепление">
+            <column name="id_закреп">1</column>
+            <column name="id_ос">1</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">18</column>
+            <column name="id_ос">17</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">21</column>
+            <column name="id_ос">20</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">22</column>
+            <column name="id_ос">21</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">25</column>
+            <column name="id_ос">24</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">27</column>
+            <column name="id_ос">26</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">28</column>
+            <column name="id_ос">27</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">29</column>
+            <column name="id_ос">28</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">31</column>
+            <column name="id_ос">30</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">32</column>
+            <column name="id_ос">31</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">35</column>
+            <column name="id_ос">34</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">36</column>
+            <column name="id_ос">35</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">37</column>
+            <column name="id_ос">36</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">38</column>
+            <column name="id_ос">37</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">39</column>
+            <column name="id_ос">38</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">40</column>
+            <column name="id_ос">39</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">41</column>
+            <column name="id_ос">40</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">42</column>
+            <column name="id_ос">41</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">43</column>
+            <column name="id_ос">42</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">44</column>
+            <column name="id_ос">43</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">45</column>
+            <column name="id_ос">44</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">46</column>
+            <column name="id_ос">45</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">48</column>
+            <column name="id_ос">47</column>
+            <column name="id_мол">5</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">49</column>
+            <column name="id_ос">48</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">50</column>
+            <column name="id_ос">49</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">51</column>
+            <column name="id_ос">50</column>
+            <column name="id_мол">5</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">52</column>
+            <column name="id_ос">51</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">53</column>
+            <column name="id_ос">52</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">54</column>
+            <column name="id_ос">53</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">55</column>
+            <column name="id_ос">54</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">56</column>
+            <column name="id_ос">55</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">57</column>
+            <column name="id_ос">56</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">58</column>
+            <column name="id_ос">57</column>
+            <column name="id_мол">4</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">59</column>
+            <column name="id_ос">58</column>
+            <column name="id_мол">2</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">60</column>
+            <column name="id_ос">59</column>
+            <column name="id_мол">1</column>
+        </table>
+        <table name="закрепление">
+            <column name="id_закреп">61</column>
+            <column name="id_ос">60</column>
+            <column name="id_мол">2</column>
+        </table>
+        <!-- Таблица ос -->
+        <table name="ос">
+            <column name="id_ос">1</column>
+            <column name="ин">105001</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2018-09-14</column>
+            <column name="пер_стоимость">10000</column>
+            <column name="год_сум_а">1100</column>
+            <column name="наименование">Фрезерный станок</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">1000</column>
+            <column name="фин_стоимость">11000</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">2</column>
+            <column name="ин">101001</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2017-11-14</column>
+            <column name="пер_стоимость">500</column>
+            <column name="год_сум_а">60</column>
+            <column name="наименование">Сварочный аппарат</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">50</column>
+            <column name="фин_стоимость">550</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">17</column>
+            <column name="ин">102222</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2015-02-03</column>
+            <column name="пер_стоимость">1335</column>
+            <column name="год_сум_а">304.38</column>
+            <column name="наименование">Резак</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">186.9</column>
+            <column name="фин_стоимость">1521.9</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">18</column>
+            <column name="ин">101221</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2015-02-27</column>
+            <column name="пер_стоимость">145</column>
+            <column name="год_сум_а">14.5</column>
+            <column name="наименование">Набор инструментов</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">11</column>
+            <column name="сумма_ндс">14.5</column>
+            <column name="фин_стоимость">159.5</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">19</column>
+            <column name="ин">103001</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2015-02-10</column>
+            <column name="пер_стоимость">230</column>
+            <column name="год_сум_а">39.43</column>
+            <column name="наименование">Стальной тросс</column>
+            <column name="норма_ндс">20</column>
+            <column name="спи">7</column>
+            <column name="сумма_ндс">46</column>
+            <column name="фин_стоимость">276</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">20</column>
+            <column name="ин">104645</column>
+            <column name="id_вида_ос">4</column>
+            <column name="дата_принятия">2015-03-11</column>
+            <column name="пер_стоимость">11489</column>
+            <column name="год_сум_а">880.82</column>
+            <column name="наименование">Транспортёр</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">15</column>
+            <column name="сумма_ндс">1723.35</column>
+            <column name="фин_стоимость">13212.35</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">21</column>
+            <column name="ин">103122</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2015-03-03</column>
+            <column name="пер_стоимость">420</column>
+            <column name="год_сум_а">46.2</column>
+            <column name="наименование">Тележка</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">42</column>
+            <column name="фин_стоимость">462</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">22</column>
+            <column name="ин">103147</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2015-03-01</column>
+            <column name="пер_стоимость">23</column>
+            <column name="год_сум_а">3.61</column>
+            <column name="наименование">Набор крепежей</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">7</column>
+            <column name="сумма_ндс">2.3</column>
+            <column name="фин_стоимость">25.3</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">23</column>
+            <column name="ин">103123</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2015-03-22</column>
+            <column name="пер_стоимость">150</column>
+            <column name="год_сум_а">6.6</column>
+            <column name="наименование">Стол компьютерный</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">25</column>
+            <column name="сумма_ндс">15</column>
+            <column name="фин_стоимость">165</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">24</column>
+            <column name="ин">105002</column>
+            <column name="id_вида_ос">5</column>
+            <column name="дата_принятия">2015-04-06</column>
+            <column name="пер_стоимость">15260</column>
+            <column name="год_сум_а">1338.18</column>
+            <column name="наименование">Погрузчик</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">13</column>
+            <column name="сумма_ндс">2136.4</column>
+            <column name="фин_стоимость">17396.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">25</column>
+            <column name="ин">101103</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2015-04-12</column>
+            <column name="пер_стоимость">412</column>
+            <column name="год_сум_а">151.07</column>
+            <column name="наименование">Колёсный вал</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">41.2</column>
+            <column name="фин_стоимость">453.2</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">26</column>
+            <column name="ин">102146</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2015-05-08</column>
+            <column name="пер_стоимость">19846.23</column>
+            <column name="год_сум_а">2262.47</column>
+            <column name="наименование">Станок для обработки металла</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">2778.47</column>
+            <column name="фин_стоимость">22624.7</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">27</column>
+            <column name="ин">103698</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2015-07-04</column>
+            <column name="пер_стоимость">123</column>
+            <column name="год_сум_а">27.06</column>
+            <column name="наименование">Набор инструментов</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">12.3</column>
+            <column name="фин_стоимость">135.3</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">28</column>
+            <column name="ин">105100</column>
+            <column name="id_вида_ос">5</column>
+            <column name="дата_принятия">2015-08-17</column>
+            <column name="пер_стоимость">18794</column>
+            <column name="год_сум_а">2142.52</column>
+            <column name="наименование">Автомобиль маз</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">2631.16</column>
+            <column name="фин_стоимость">21425.16</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">29</column>
+            <column name="ин">101163</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2015-09-10</column>
+            <column name="пер_стоимость">1000</column>
+            <column name="год_сум_а">122.22</column>
+            <column name="наименование">Компьютер asus</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">9</column>
+            <column name="сумма_ндс">100</column>
+            <column name="фин_стоимость">1100</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">30</column>
+            <column name="ин">101005</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2016-07-14</column>
+            <column name="пер_стоимость">400</column>
+            <column name="год_сум_а">88</column>
+            <column name="наименование">Принтер samsung</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">40</column>
+            <column name="фин_стоимость">440</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">31</column>
+            <column name="ин">101006</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2016-09-21</column>
+            <column name="пер_стоимость">365.13</column>
+            <column name="год_сум_а">138.75</column>
+            <column name="наименование">Сканер aser</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">51.12</column>
+            <column name="фин_стоимость">416.25</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">32</column>
+            <column name="ин">103324</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2016-11-24</column>
+            <column name="пер_стоимость">41</column>
+            <column name="год_сум_а">4.51</column>
+            <column name="наименование">Стул металличесский</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">4.1</column>
+            <column name="фин_стоимость">45.1</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">33</column>
+            <column name="ин">103148</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2017-03-29</column>
+            <column name="пер_стоимость">135</column>
+            <column name="год_сум_а">54</column>
+            <column name="наименование">Тележка</column>
+            <column name="норма_ндс">20</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">27</column>
+            <column name="фин_стоимость">162</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">34</column>
+            <column name="ин">102142</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2017-08-18</column>
+            <column name="пер_стоимость">1345</column>
+            <column name="год_сум_а">191.66</column>
+            <column name="наименование">Электролобзик</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">8</column>
+            <column name="сумма_ндс">188.3</column>
+            <column name="фин_стоимость">1533.3</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">35</column>
+            <column name="ин">103648</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2017-08-30</column>
+            <column name="пер_стоимость">560</column>
+            <column name="год_сум_а">61.6</column>
+            <column name="наименование">Шкаф</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">56</column>
+            <column name="фин_стоимость">616</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">36</column>
+            <column name="ин">103120</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2017-10-05</column>
+            <column name="пер_стоимость">13</column>
+            <column name="год_сум_а">4.77</column>
+            <column name="наименование">Стул кожанный</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">1.3</column>
+            <column name="фин_стоимость">14.3</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">37</column>
+            <column name="ин">104145</column>
+            <column name="id_вида_ос">4</column>
+            <column name="дата_принятия">2017-10-20</column>
+            <column name="пер_стоимость">137</column>
+            <column name="год_сум_а">32.88</column>
+            <column name="наименование">Сеть компьютерная</column>
+            <column name="норма_ндс">20</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">27.4</column>
+            <column name="фин_стоимость">164.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">38</column>
+            <column name="ин">106896</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2018-03-02</column>
+            <column name="пер_стоимость">15023</column>
+            <column name="год_сум_а">2879.41</column>
+            <column name="наименование">Малый погрузчик</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">6</column>
+            <column name="сумма_ндс">2253.45</column>
+            <column name="фин_стоимость">17276.45</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">39</column>
+            <column name="ин">106198</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2018-03-24</column>
+            <column name="пер_стоимость">134</column>
+            <column name="год_сум_а">29.48</column>
+            <column name="наименование">Переносная лампа накаливания</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">13.4</column>
+            <column name="фин_стоимость">147.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">40</column>
+            <column name="ин">102489</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2018-05-18</column>
+            <column name="пер_стоимость">54</column>
+            <column name="год_сум_а">15.39</column>
+            <column name="наименование">Инструменты</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">7.56</column>
+            <column name="фин_стоимость">61.56</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">41</column>
+            <column name="ин">101795</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2018-05-27</column>
+            <column name="пер_стоимость">14</column>
+            <column name="год_сум_а">5.13</column>
+            <column name="наименование">Тумбочка дб</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">1.4</column>
+            <column name="фин_стоимость">15.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">42</column>
+            <column name="ин">101635</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2018-07-05</column>
+            <column name="пер_стоимость">134</column>
+            <column name="год_сум_а">38.19</column>
+            <column name="наименование">Кресло</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">18.76</column>
+            <column name="фин_стоимость">152.76</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">43</column>
+            <column name="ин">104634</column>
+            <column name="id_вида_ос">4</column>
+            <column name="дата_принятия">2018-07-27</column>
+            <column name="пер_стоимость">478</column>
+            <column name="год_сум_а">109.94</column>
+            <column name="наименование">Линия связи</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">71.7</column>
+            <column name="фин_стоимость">549.7</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">44</column>
+            <column name="ин">102934</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2018-09-19</column>
+            <column name="пер_стоимость">875</column>
+            <column name="год_сум_а">192.5</column>
+            <column name="наименование">Сварочный аппарат</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">5</column>
+            <column name="сумма_ндс">87.5</column>
+            <column name="фин_стоимость">962.5</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">45</column>
+            <column name="ин">106645</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2018-09-02</column>
+            <column name="пер_стоимость">654</column>
+            <column name="год_сум_а">188.02</column>
+            <column name="наименование">Генератор</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">98.1</column>
+            <column name="фин_стоимость">752.1</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">46</column>
+            <column name="ин">101317</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2018-10-11</column>
+            <column name="пер_стоимость">54</column>
+            <column name="год_сум_а">21.6</column>
+            <column name="наименование">Тумбочка дб</column>
+            <column name="норма_ндс">20</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">10.8</column>
+            <column name="фин_стоимость">64.8</column>
+            <column name="статус">0</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">47</column>
+            <column name="ин">106698</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2019-03-13</column>
+            <column name="пер_стоимость">810</column>
+            <column name="год_сум_а">230.85</column>
+            <column name="наименование">Дробитель строительный</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">113.4</column>
+            <column name="фин_стоимость">923.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">48</column>
+            <column name="ин">104698</column>
+            <column name="id_вида_ос">4</column>
+            <column name="дата_принятия">2020-01-08</column>
+            <column name="пер_стоимость">10050</column>
+            <column name="год_сум_а">3685</column>
+            <column name="наименование">Теплопровод</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">1005</column>
+            <column name="фин_стоимость">11055</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">49</column>
+            <column name="ин">101431</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2020-02-02</column>
+            <column name="пер_стоимость">15000</column>
+            <column name="год_сум_а">1916.67</column>
+            <column name="наименование">Компьютер lenovo</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">9</column>
+            <column name="сумма_ндс">2250</column>
+            <column name="фин_стоимость">17250</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">50</column>
+            <column name="ин">101734</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2020-05-14</column>
+            <column name="пер_стоимость">14694</column>
+            <column name="год_сум_а">5387.8</column>
+            <column name="наименование">Ноутбук lenovo</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">1469.4</column>
+            <column name="фин_стоимость">16163.4</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">51</column>
+            <column name="ин">101433</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2020-07-24</column>
+            <column name="пер_стоимость">320</column>
+            <column name="год_сум_а">91.2</column>
+            <column name="наименование">Монитор xiomi</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">44.8</column>
+            <column name="фин_стоимость">364.8</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">52</column>
+            <column name="ин">103962</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2021-02-11</column>
+            <column name="пер_стоимость">132</column>
+            <column name="год_сум_а">37.62</column>
+            <column name="наименование">Стол компьютерный</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">18.48</column>
+            <column name="фин_стоимость">150.48</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">53</column>
+            <column name="ин">103687</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2021-02-07</column>
+            <column name="пер_стоимость">470</column>
+            <column name="год_сум_а">135.12</column>
+            <column name="наименование">Уборочный агрегат</column>
+            <column name="норма_ндс">15</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">70.5</column>
+            <column name="фин_стоимость">540.5</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">54</column>
+            <column name="ин">102922</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2021-05-13</column>
+            <column name="пер_стоимость">1450</column>
+            <column name="год_сум_а">551</column>
+            <column name="наименование">Пуливизатор</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">203</column>
+            <column name="фин_стоимость">1653</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">55</column>
+            <column name="ин">102444</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2021-07-02</column>
+            <column name="пер_стоимость">1539</column>
+            <column name="год_сум_а">423.22</column>
+            <column name="наименование">Лакокрасочный расспылитель</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">4</column>
+            <column name="сумма_ндс">153.9</column>
+            <column name="фин_стоимость">1692.9</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">56</column>
+            <column name="ин">103789</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2021-07-23</column>
+            <column name="пер_стоимость">312</column>
+            <column name="год_сум_а">118.56</column>
+            <column name="наименование">Столик для ноутбука</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">43.68</column>
+            <column name="фин_стоимость">355.68</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">57</column>
+            <column name="ин">106745</column>
+            <column name="id_вида_ос">6</column>
+            <column name="дата_принятия">2021-07-31</column>
+            <column name="пер_стоимость">968</column>
+            <column name="год_сум_а">580.8</column>
+            <column name="наименование">Стационарный телефон</column>
+            <column name="норма_ндс">20</column>
+            <column name="спи">2</column>
+            <column name="сумма_ндс">193.6</column>
+            <column name="фин_стоимость">1161.6</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">58</column>
+            <column name="ин">101741</column>
+            <column name="id_вида_ос">1</column>
+            <column name="дата_принятия">2021-09-07</column>
+            <column name="пер_стоимость">364</column>
+            <column name="год_сум_а">414.96</column>
+            <column name="наименование">Звуковая система</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">1</column>
+            <column name="сумма_ндс">50.96</column>
+            <column name="фин_стоимость">414.96</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">59</column>
+            <column name="ин">103468</column>
+            <column name="id_вида_ос">3</column>
+            <column name="дата_принятия">2021-09-10</column>
+            <column name="пер_стоимость">3156</column>
+            <column name="год_сум_а">347.16</column>
+            <column name="наименование">Венчурная система</column>
+            <column name="норма_ндс">10</column>
+            <column name="спи">10</column>
+            <column name="сумма_ндс">315.6</column>
+            <column name="фин_стоимость">3471.6</column>
+            <column name="статус">1</column>
+        </table>
+        <table name="ос">
+            <column name="id_ос">60</column>
+            <column name="ин">102131</column>
+            <column name="id_вида_ос">2</column>
+            <column name="дата_принятия">2021-11-30</column>
+            <column name="пер_стоимость">1212</column>
+            <column name="год_сум_а">460.56</column>
+            <column name="наименование">Станок</column>
+            <column name="норма_ндс">14</column>
+            <column name="спи">3</column>
+            <column name="сумма_ндс">169.68</column>
+            <column name="фин_стоимость">1381.68</column>
+            <column name="статус">1</column>
+        </table>
+        <!-- Таблица ремонт -->
+        <table name="ремонт">
+            <column name="id_р">1</column>
+            <column name="id_ос">1</column>
+            <column name="id_вида_р">4</column>
+            <column name="дата_начала">2019-09-07</column>
+            <column name="дата_окончания">2019-09-19</column>
+            <column name="сум_затрат">1830.6</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">2</column>
+            <column name="id_ос">2</column>
+            <column name="id_вида_р">4</column>
+            <column name="дата_начала">2021-11-01</column>
+            <column name="дата_окончания">2021-11-03</column>
+            <column name="сум_затрат">1615.78</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">4</column>
+            <column name="id_ос">1</column>
+            <column name="id_вида_р">3</column>
+            <column name="дата_начала">2021-11-01</column>
+            <column name="дата_окончания">2021-11-20</column>
+            <column name="сум_затрат">1830.6</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">5</column>
+            <column name="id_ос">20</column>
+            <column name="id_вида_р">1</column>
+            <column name="дата_начала">2016-04-14</column>
+            <column name="дата_окончания">2016-05-06</column>
+            <column name="сум_затрат">47</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">6</column>
+            <column name="id_ос">21</column>
+            <column name="id_вида_р">4</column>
+            <column name="дата_начала">2018-06-06</column>
+            <column name="дата_окончания">2018-06-08</column>
+            <column name="сум_затрат">47</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">7</column>
+            <column name="id_ос">26</column>
+            <column name="id_вида_р">6</column>
+            <column name="дата_начала">2017-05-05</column>
+            <column name="дата_окончания">NULL</column>
+            <column name="сум_затрат">NULL</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">8</column>
+            <column name="id_ос">28</column>
+            <column name="id_вида_р">7</column>
+            <column name="дата_начала">2017-05-20</column>
+            <column name="дата_окончания">NULL</column>
+            <column name="сум_затрат">NULL</column>
+        </table>
+        <table name="ремонт">
+            <column name="id_р">9</column>
+            <column name="id_ос">38</column>
+            <column name="id_вида_р">5</column>
+            <column name="дата_начала">2020-01-16</column>
+            <column name="дата_окончания">NULL</column>
+            <column name="сум_затрат">NULL</column>
+        </table>
+        <!-- Таблица списание -->
+        <table name="списание">
+            <column name="id_спис">1</column>
+            <column name="id_ос">2</column>
+            <column name="id_причины">1</column>
+            <column name="дата_списания">2021-11-22</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">2</column>
+            <column name="id_ос">23</column>
+            <column name="id_причины">1</column>
+            <column name="дата_списания">2017-06-22</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">3</column>
+            <column name="id_ос">29</column>
+            <column name="id_причины">3</column>
+            <column name="дата_списания">2017-06-03</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">4</column>
+            <column name="id_ос">19</column>
+            <column name="id_причины">5</column>
+            <column name="дата_списания">2020-03-05</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">5</column>
+            <column name="id_ос">32</column>
+            <column name="id_причины">2</column>
+            <column name="дата_списания">2020-05-22</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">6</column>
+            <column name="id_ос">25</column>
+            <column name="id_причины">2</column>
+            <column name="дата_списания">2021-03-05</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">7</column>
+            <column name="id_ос">33</column>
+            <column name="id_причины">1</column>
+            <column name="дата_списания">2021-04-23</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">8</column>
+            <column name="id_ос">22</column>
+            <column name="id_причины">1</column>
+            <column name="дата_списания">2019-02-07</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">9</column>
+            <column name="id_ос">46</column>
+            <column name="id_причины">4</column>
+            <column name="дата_списания">2018-10-25</column>
+        </table>
+        <table name="списание">
+            <column name="id_спис">10</column>
+            <column name="id_ос">18</column>
+            <column name="id_причины">5</column>
+            <column name="дата_списания">2021-02-26</column>
+        </table>
+    </database>
+</pma_xml_export>
